@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { useApp } from "../context/AppContext";
 import { content } from "../data/content";
 import PixelIcon from "./PixelIcon";
 
+const baseUrl = typeof import.meta.env.BASE_URL === "string" ? import.meta.env.BASE_URL : "/";
+
 export default function Certificates() {
   const { lang, theme } = useApp();
   const t = content[lang];
+  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
 
   if (!t.certificates || !t.certificates.items || t.certificates.items.length === 0) {
     return null;
@@ -46,13 +50,20 @@ export default function Certificates() {
                 <p className={`text-sm mb-3 sm:mb-4 ${theme === "dark" ? "text-[#fbbf24]" : "text-[#d97706]"}`} style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.2)" }}>{item.period}</p>
                 {item.image && (
                   <div className="mb-3 sm:mb-4 overflow-hidden rounded-lg border-2 border-yellow-500/30 bg-black/20">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-auto max-h-[50vh] sm:max-h-[360px] object-contain object-left-top rounded-lg"
-                      style={{ imageRendering: "auto" }}
-                      loading="lazy"
-                    />
+                    {failedImages.has(index) ? (
+                      <div className={`flex items-center justify-center min-h-[200px] rounded-lg ${theme === "dark" ? "bg-gray-800/50 text-gray-400" : "bg-gray-200/50 text-gray-500"}`}>
+                        <span className="text-sm">Certificate image not found. Add to <code className="text-xs">frontend/public/</code></span>
+                      </div>
+                    ) : (
+                      <img
+                        src={item.image.startsWith("http") ? item.image : `${baseUrl}${item.image.replace(/^\//, "")}`}
+                        alt={item.name}
+                        className="w-full h-auto max-h-[50vh] sm:max-h-[360px] object-contain object-left-top rounded-lg"
+                        style={{ imageRendering: "auto" }}
+                        loading="lazy"
+                        onError={() => setFailedImages((prev) => new Set(prev).add(index))}
+                      />
+                    )}
                   </div>
                 )}
                 {item.description && (

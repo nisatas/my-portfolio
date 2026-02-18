@@ -72,6 +72,15 @@ nisa-portfolio/
 └── README.md
 ```
 
+## Certificate images
+
+For certificate images to appear on the site, add the image files to **`frontend/public/`** with these exact names:
+
+- `certificate-ai-weekend.jpg` – INSIDER ONE AI WEEKEND certificate
+- `certificate-ankara-ai-hackathon.jpg` – Ankara AI Hackathon certificate
+
+If a file is missing, the Certificates section will show a short placeholder message instead of a broken image.
+
 ## Deploy
 
 - **Render (recommended):** Frontend and backend together; NisaBot and contact form work. Step-by-step: **RENDER.md**
