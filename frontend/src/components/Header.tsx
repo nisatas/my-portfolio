@@ -4,13 +4,13 @@ import { content } from "../data/content";
 
 const navItems = [
   { id: "about", labelKey: "about" as const },
+  { id: "skill-map", labelKey: "skillMap" as const },
   { id: "education", labelKey: "edu" as const },
   { id: "experience", labelKey: "exp" as const },
   { id: "hackathons", labelKey: "hackathons" as const },
   { id: "projects", labelKey: "projects" as const },
   { id: "certificates", labelKey: "certificates" as const },
   { id: "contact", labelKey: "contact" as const },
-  { id: "skill-map", labelKey: "skillMap" as const },
 ];
 
 export default function Header() {

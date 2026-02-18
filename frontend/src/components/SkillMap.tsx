@@ -28,6 +28,7 @@ const defaultPositions = [
   { left: 70, top: 12, delay: "0.7s" },
   { left: 85, top: 22, delay: "0.3s" },
   { left: 12, top: 55, delay: "0.4s" },
+  { left: 38, top: 58, delay: "0.15s" },
   { left: 55, top: 60, delay: "0.1s" },
   { left: 78, top: 52, delay: "0.6s" },
 ];
@@ -173,7 +174,7 @@ export default function SkillMap() {
           />
 
           {/* Adalar — yazıya göre boyut, sürüklenebilir */}
-          {islands.map((island: { id: string; label: string; ability: string; type: keyof typeof islandTypeStyles }, i: number) => {
+          {islands.map((island: { id: string; label: string; ability: string; type: keyof typeof islandTypeStyles; libraries?: string }, i: number) => {
             const pos = getPosition(i, island.id);
             const defaultDelay = defaultPositions[i % defaultPositions.length].delay;
             const typeStyles = islandTypeStyles[island.type] ?? islandTypeStyles.other;
@@ -182,7 +183,7 @@ export default function SkillMap() {
             return (
               <div
                 key={island.id}
-                className={`absolute rounded-sm border-2 ${style} flex items-center justify-center cursor-grab active:cursor-grabbing group z-10 min-w-[5rem] min-h-[2.5rem] sm:min-w-[6rem] sm:min-h-[3rem] px-2 py-1.5 sm:px-3 sm:py-2 ${isDragging ? "pointer-events-none" : "island-float"}`}
+                className={`absolute rounded-sm border-2 ${style} flex flex-col items-center justify-center cursor-grab active:cursor-grabbing group z-10 min-w-[5rem] min-h-[2.5rem] sm:min-w-[6rem] sm:min-h-[3rem] px-2 py-1.5 sm:px-3 sm:py-2 ${isDragging ? "pointer-events-none" : "island-float"}`}
                 style={{
                   left: `${pos.left}%`,
                   top: `${pos.top}%`,
@@ -201,18 +202,26 @@ export default function SkillMap() {
                 role="button"
                 tabIndex={0}
               >
-                {/* Ada üzerindeki yazı — yazıyla hizalı boyut, opak arka plan */}
+                {/* Ada üzerindeki yazı + kütüphane alt başlığı */}
                 <span
                   className={`font-pixel text-[8px] sm:text-[10px] text-center leading-tight px-1 py-0.5 rounded-sm whitespace-nowrap ${theme === "dark" ? "bg-black/70 text-amber-200" : "bg-black/60 text-white"} shadow-md`}
                 >
                   {island.label}
                 </span>
+                {island.libraries && (
+                  <span
+                    className={`font-pixel text-[6px] sm:text-[8px] text-center leading-tight mt-0.5 px-1 rounded-sm whitespace-nowrap ${theme === "dark" ? "text-amber-300/90" : "text-amber-100"}`}
+                  >
+                    {island.libraries}
+                  </span>
+                )}
                 {/* Hover (masaüstü): kısa tooltip — opak arka plan, okunaklı */}
                 <div
                   className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded border-2 shadow-xl transition-opacity pointer-events-none z-20 ${activeId === island.id ? "opacity-0" : "opacity-0 group-hover:opacity-100"} ${theme === "dark" ? "bg-[#0f0f0f] text-amber-100 border-amber-600/80" : "bg-white text-gray-900 border-amber-400/80"}`}
                   style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.4))" }}
                 >
                   <span className="font-semibold text-xs block">{island.label}</span>
+                  {island.libraries && <span className={`block text-[10px] mt-0.5 ${theme === "dark" ? "text-amber-200/90" : "text-amber-700"}`}>{island.libraries}</span>}
                   <span className={`block text-[11px] mt-0.5 ${theme === "dark" ? "text-gray-300" : "text-gray-600"}`}>{island.ability}</span>
                 </div>
               </div>
