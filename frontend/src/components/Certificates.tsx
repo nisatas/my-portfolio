@@ -45,12 +45,13 @@ export default function Certificates() {
                 </div>
                 <p className={`text-sm mb-3 sm:mb-4 ${theme === "dark" ? "text-[#fbbf24]" : "text-[#d97706]"}`} style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.2)" }}>{item.period}</p>
                 {item.image && (
-                  <div className="mb-3 sm:mb-4">
+                  <div className="mb-3 sm:mb-4 overflow-hidden rounded-lg border-2 border-yellow-500/30 bg-black/20">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-auto rounded-lg border-2 border-yellow-500/30"
-                      style={{ imageRendering: "pixelated" }}
+                      className="w-full h-auto max-h-[50vh] sm:max-h-[360px] object-contain object-left-top rounded-lg"
+                      style={{ imageRendering: "auto" }}
+                      loading="lazy"
                     />
                   </div>
                 )}
