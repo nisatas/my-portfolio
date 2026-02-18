@@ -75,7 +75,6 @@ export default function Contact() {
               {t.contact.info.map((item: any, index: number) => {
                 const isEmail = item.label === "E-posta" || item.label === "Email";
                 const isLinkedIn = item.label === "LinkedIn";
-                const isGitHub = item.label === "GitHub";
                 const iconSrc = isEmail ? "/eposta.png" : isLinkedIn ? "/linkedin.png" : "/github.png";
                 return (
                 <div
