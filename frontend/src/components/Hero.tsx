@@ -27,9 +27,8 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex flex-col pt-20 sm:pt-24 px-4 sm:px-6 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden pt-16 sm:pt-20"
     >
-      <div className="flex-1 flex items-center justify-center min-h-0 relative">
       {/* Hakkımda arka plan: aşağı kaydıkça silikleşir */}
       <div
         className="absolute inset-0 transition-opacity duration-150"
@@ -43,7 +42,7 @@ export default function Hero() {
         <div className={`absolute inset-0 ${theme === "dark" ? "bg-black/50" : "bg-white/30"}`} />
       </div>
 
-        {/* Content */}
+      {/* Content */}
       <div className="relative z-10 w-full max-w-6xl">
         <div className={`${theme === "dark" ? "bg-black/50" : "bg-white/40"} backdrop-blur-md border ${theme === "dark" ? "border-cyan-400/40" : "border-cyan-600/60"} rounded-3xl p-6 sm:p-8 md:p-12 lg:p-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start`}>
           
@@ -146,7 +145,6 @@ export default function Hero() {
             <PixelChatbot />
           </div>
         </div>
-      </div>
       </div>
     </section>
   );
