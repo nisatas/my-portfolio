@@ -24,13 +24,13 @@ export default function App() {
       <div className="relative z-10">
         <Header />
         <Hero />
+        <SkillMap />
         <Education />
         <Experience />
         <Certificates />
         <Hackathons />
         <Projects />
         <Contact />
-        <SkillMap />
         <Footer />
       </div>
     </div>
