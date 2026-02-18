@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useApp } from "../context/AppContext";
 import { content } from "../data/content";
-import PixelIcon from "./PixelIcon";
 
 const baseUrl = typeof import.meta.env.BASE_URL === "string" ? import.meta.env.BASE_URL : "/";
 
@@ -44,7 +43,7 @@ export default function Certificates() {
                 className={`card-minecraft p-4 sm:p-6 relative ${theme === "dark" ? "card-minecraft-dark" : "card-minecraft-light"}`}
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <PixelIcon name="trophy" className="w-7 h-7 sm:w-8 sm:h-8" dark={theme === "dark"} />
+                  <img src="/certificate.png" alt="" className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0" />
                   <h3 className={`text-xl sm:text-2xl font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`} style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}>{item.name}</h3>
                 </div>
                 <p className={`text-sm mb-3 sm:mb-4 ${theme === "dark" ? "text-[#fbbf24]" : "text-[#d97706]"}`} style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.2)" }}>{item.period}</p>
@@ -68,6 +67,17 @@ export default function Certificates() {
                 )}
                 {item.description && (
                   <p className={`mt-3 sm:mt-4 opacity-80 leading-relaxed ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>{item.description}</p>
+                )}
+                {item.pdf && (
+                  <a
+                    href={item.pdf.startsWith("http") ? item.pdf : `${baseUrl}${item.pdf.replace(/^\//, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-2 mt-3 text-sm font-semibold ${theme === "dark" ? "text-cyan-400 hover:text-cyan-300" : "text-cyan-600 hover:text-cyan-700"} underline decoration-cyan-500/50`}
+                  >
+                    <span>📄</span>
+                    {lang === "tr" ? "Sertifikayı görüntüle (PDF)" : "View certificate (PDF)"}
+                  </a>
                 )}
               </div>
             ))}

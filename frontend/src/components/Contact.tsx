@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useApp } from "../context/AppContext";
 import { content } from "../data/content";
 import { toast } from "react-toastify";
-import PixelIcon from "./PixelIcon";
 import { apiBase } from "../api";
 
 export default function Contact() {
@@ -73,16 +72,21 @@ export default function Contact() {
             <div className="space-y-4 sm:space-y-6">
               <h3 className={`text-xl sm:text-2xl font-bold mb-4 sm:mb-6 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>{t.contact.infoTitle}</h3>
               
-              {t.contact.info.map((item: any, index: number) => (
+              {t.contact.info.map((item: any, index: number) => {
+                const isEmail = item.label === "E-posta" || item.label === "Email";
+                const isLinkedIn = item.label === "LinkedIn";
+                const isGitHub = item.label === "GitHub";
+                const iconSrc = isEmail ? "/eposta.png" : isLinkedIn ? "/linkedin.png" : "/github.png";
+                return (
                 <div
                   key={index}
                   className={`card-minecraft p-4 relative ${theme === "dark" ? "card-minecraft-dark" : "card-minecraft-light"}`}
                 >
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <PixelIcon
-                      name={item.label === "E-posta" || item.label === "Email" ? "email" : item.label === "LinkedIn" ? "linkedin" : "github"}
-                      className="w-7 h-7 sm:w-8 sm:h-8"
-                      dark={theme === "dark"}
+                    <img
+                      src={iconSrc}
+                      alt={item.label}
+                      className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0"
                     />
                     <div>
                       <p className={`font-semibold mb-1 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>{item.label}</p>
@@ -101,7 +105,8 @@ export default function Contact() {
                     </div>
                   </div>
                 </div>
-              ))}
+              );
+              })}
             </div>
 
             {/* Contact Form */}

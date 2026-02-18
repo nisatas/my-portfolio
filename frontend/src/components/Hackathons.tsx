@@ -42,7 +42,7 @@ export default function Hackathons() {
               >
                 {/* Hackathon ismi */}
                 <div className="flex items-center gap-2 mb-2">
-                  <PixelIcon name="rocket" className="w-7 h-7 sm:w-8 sm:h-8" dark={theme === "dark"} />
+                  <img src="/hackathon.png" alt="" className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0" />
                   <h3 className={`text-xl sm:text-2xl font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`} style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}>
                     {item.name}
                   </h3>

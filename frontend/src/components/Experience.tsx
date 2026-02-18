@@ -1,6 +1,5 @@
 import { useApp } from "../context/AppContext";
 import { content } from "../data/content";
-import PixelIcon from "./PixelIcon";
 
 export default function Experience() {
   const { lang, theme } = useApp();
@@ -36,7 +35,7 @@ export default function Experience() {
                 className={`card-minecraft p-4 sm:p-6 relative ${theme === "dark" ? "card-minecraft-dark" : "card-minecraft-light"}`}
               >
                 <div className="flex items-center gap-2 mb-2">
-                  <PixelIcon name="briefcase" className="w-7 h-7 sm:w-8 sm:h-8" dark={theme === "dark"} />
+                  <img src="/job.png" alt="" className="w-7 h-7 sm:w-8 sm:h-8 object-contain flex-shrink-0" />
                   <h3 className={`text-xl sm:text-2xl font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`} style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}>{item.position}</h3>
                 </div>
                 <p className={`text-base sm:text-lg mb-2 font-semibold ${theme === "dark" ? "text-[#ec4899]" : "text-[#db2777]"}`} style={{ textShadow: theme === "dark" ? "0 0 8px rgba(236, 72, 153, 0.5)" : "0 0 5px rgba(219, 39, 119, 0.3)" }}>🏢 {item.company}</p>

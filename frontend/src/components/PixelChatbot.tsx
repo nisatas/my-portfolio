@@ -8,26 +8,46 @@ type Msg = { from: "user" | "bot"; text: string };
 
 // Fallback function - ChatAPI çalışmazsa kullanılır
 function fallbackAnswer(lang: "tr" | "en", q: string) {
-  const s = q.toLowerCase();
+  const s = q.toLowerCase().trim();
 
   if (lang === "tr") {
-    if (s.includes("kim") || s.includes("kimsin") || s.includes("nisa")) return "Ben Nisa Ataş. Full Stack Developer Trainee ve öğrenciyim. Modern web teknolojileriyle projeler geliştirmeye ilgi duyuyorum. Robotik kodlama, yazılım geliştirme ve yapay zeka alanlarında deneyime sahibim.";
+    const greetingTr = /^(selam|selm|selamm|selan|merhaba|merhab|meraba|merha|mrb|slm|hey|naber|sa|selamlar|merhabalar)[\s!.]*$/i.test(s);
+    if (greetingTr) return "Selammm! Nasılsın? Nisa hakkında ne öğrenmek istersin?";
+    const jobIntent = /ne\s*(iş|yapıyor|yapıyorsun|işe)|işin\s*ne|nerede\s*çalış|şu\s*an\s*ne|şuan\s*ne|napiyon|ne iş/;
+    if (jobIntent.test(s)) return "Şu an Workintech'te Full Stack Developer Trainee ve AUZEM YETAM XR'da öğrenci asistanı olarak devam ediyorum.";
+    const contactIntent = /iletişim|ulaş|ulaşırım|mail|e-?posta|linkedin|github|email|numara|telefon|iletişim\s*bilgi/;
+    if (contactIntent.test(s)) return "E-posta: nisatas544@gmail.com, GitHub: github.com/nisatas, LinkedIn: linkedin.com/in/nisaatas. İletişim bölümünden detaylı bilgilere ulaşabilirsin.";
+    const whoIntent = /kim(dir)?|kimsin|tanıt|hakkında|tanıyabilir|nisa\s*ne|nisa\s*kim/;
+    if (whoIntent.test(s) || s.includes("nisa")) return "Ben Nisa Ataş. Full Stack Developer Trainee ve öğrenciyim. Modern web teknolojileriyle projeler geliştirmeye ilgi duyuyorum. Robotik kodlama, yazılım geliştirme ve yapay zeka alanlarında deneyime sahibim.";
     if (s.includes("teknoloji") || s.includes("stack") || s.includes("yetenek") || s.includes("beceri")) return "Front-End: JavaScript, React.js, Hooks, Redux, HTML, CSS, TailwindCSS. Back-End: Java, Spring Boot, SQL, Git, ASP.NET, C#. Diğer: Algorithms, Debugging, Deployment, Problem Solving, API Integration, Figma, Teamwork.";
-    if (s.includes("iletişim") || s.includes("mail") || s.includes("linkedin") || s.includes("github") || s.includes("email")) return "E-posta: nisatas544@gmail.com, GitHub: github.com/nisatas, LinkedIn: linkedin.com/in/nisaatas. İletişim bölümünden detaylı bilgilere ulaşabilirsin.";
     if (s.includes("eğitim") || s.includes("okul") || s.includes("üniversite")) return "İstanbul Üniversitesi - Bilgisayar Programcılığı (2025-2027) ve İstanbul Üniversitesi - Cerrahpaşa - Bilgisayar ve Öğretim Teknolojileri Öğretmenliği (2022-2026) öğrencisiyim.";
-    if (s.includes("deneyim") || s.includes("iş") || s.includes("workintech") || s.includes("çalışma")) return "Workintech'te Full Stack Developer Trainee olarak çalışıyorum (Temmuz 2025 - Günümüz). Ayrıca AUZEM - YETAM XR'da öğrenci asistanı, Robotik Bilim'de robotik kodlama öğretmeni ve Şişli Öğretmenevi'nde eğitmen olarak deneyimlerim var.";
+    if (s.includes("deneyim") || s.includes("çalışma")) return "Workintech'te Full Stack Developer Trainee olarak çalışıyorum (Temmuz 2025 - Günümüz). Ayrıca AUZEM - YETAM XR'da öğrenci asistanı, Robotik Bilim'de robotik kodlama öğretmeni ve Şişli Öğretmenevi'nde eğitmen olarak deneyimlerim var.";
+    if (s.includes("iş") || s.includes("workintech")) return "Workintech'te Full Stack Developer Trainee olarak çalışıyorum (Temmuz 2025 - Günümüz). Ayrıca AUZEM - YETAM XR'da öğrenci asistanı.";
     if (s.includes("sertifika") || s.includes("certificate")) return "INSIDER – AI WEEKEND (29-30 Kasım) sertifikasına sahibim. LLM temelleri ve n8n ile otomasyon geliştirme alanlarında eğitim aldım.";
-    if (s.includes("dil") || s.includes("language") || s.includes("ingilizce") || s.includes("almanca")) return "İngilizce ve Almanca dillerinde B1 seviyesindeyim.";
-    return "Bunu tam anlayamadım. Eğitim, deneyim, yetenekler, sertifikalar, diller veya iletişim hakkında sorabilirsin.";
+    if (s.includes("dil") || s.includes("ingilizce") || s.includes("almanca")) return "İngilizce ve Almanca dillerinde B1 seviyesindeyim.";
+    const hobbyIntent = /hobi|hobiler|boş\s*zaman|ne\s*yaparsın|oyun\s*sever|okçuluk|yüzme|kano|oyun\s*oynar/;
+    if (hobbyIntent.test(s)) return "Yüzme ve kano yapıyorum, lisede okçuluk yaptım—okçuydum. Bilgisayar oyunlarını da çok seviyorum.";
+    const socialIntent = /sosyal|arkadaş|erkek\s*arkadaş|özel\s*hayat|aile|sevgili|yakın\s*arkadaş/;
+    if (socialIntent.test(s)) return "Erkek arkadaşımı ve yakın arkadaşlarımı çok seviyorum.";
+    return "Bunu tam anlayamadım. Eğitim, deneyim, yetenekler, hobiler, sertifikalar, diller veya iletişim hakkında sorabilirsin.";
   } else {
-    if (s.includes("who") || s.includes("about") || s.includes("nisa")) return "I'm Nisa Ataş, a Full Stack Developer Trainee and student. I'm interested in developing projects with modern web technologies. I have experience in robotics programming, software development, and artificial intelligence.";
+    const greetingEn = /^(hi|hii|hey|heyy|hello|helo|helloo|sup|yo|hi there|hello there)[\s!.]*$/i.test(s) || (s.length <= 10 && /^hi+i?|^hel+o+|^hey+$/i.test(s.replace(/\s/g, "")));
+    if (greetingEn) return "Heyy! How are you? What would you like to know about Nisa?";
+    const jobIntentEn = /what(\s+does\s+she)?\s+do|current\s+job|where\s+(does\s+she\s+)?work|doing\s+now|what\s+is\s+nisa/;
+    if (jobIntentEn.test(s)) return "Right now I'm a Full Stack Developer Trainee at Workintech and a student assistant at AUZEM YETAM XR.";
+    const contactIntentEn = /contact|reach|email|linkedin|github|how\s+to\s+(contact|reach)|get\s+in\s+touch/;
+    if (contactIntentEn.test(s)) return "Email: nisatas544@gmail.com, GitHub: github.com/nisatas, LinkedIn: linkedin.com/in/nisaatas. You can find more in the Contact section.";
+    if (s.includes("who") || s.includes("about") || s.includes("nisa") || s.includes("tell me about")) return "I'm Nisa Ataş, a Full Stack Developer Trainee and student. I'm interested in modern web tech, and I have experience in robotics, software development, and AI.";
     if (s.includes("tech") || s.includes("stack") || s.includes("skills")) return "Front-End: JavaScript, React.js, Hooks, Redux, HTML, CSS, TailwindCSS. Back-End: Java, Spring Boot, SQL, Git, ASP.NET, C#. Other: Algorithms, Debugging, Deployment, Problem Solving, API Integration, Figma, Teamwork.";
-    if (s.includes("contact") || s.includes("email") || s.includes("linkedin") || s.includes("github")) return "Email: nisatas544@gmail.com, GitHub: github.com/nisatas, LinkedIn: linkedin.com/in/nisaatas. You can find detailed information in the Contact section.";
     if (s.includes("education") || s.includes("school") || s.includes("university")) return "I'm a student at Istanbul University - Computer Programming (2025-2027) and Istanbul University - Cerrahpaşa - Computer and Instructional Technologies Education (2022-2026).";
     if (s.includes("experience") || s.includes("work") || s.includes("workintech") || s.includes("job")) return "I work as a Full Stack Developer Trainee at Workintech (July 2025 - Present). I also have experience as a student assistant at AUZEM - YETAM XR, robotics coding teacher at Robotics Science, and instructor at Şişli Teachers' House.";
     if (s.includes("certificate") || s.includes("certification")) return "I have the INSIDER – AI WEEKEND (November 29-30) certificate. I received training in LLM fundamentals and automation development with n8n.";
     if (s.includes("language") || s.includes("english") || s.includes("german")) return "I have B1 level in English and German.";
-    return "I'm not sure I got that. Ask about education, experience, skills, certificates, languages, or contact.";
+    const hobbyIntentEn = /hobb(y|ies)|free\s*time|what\s+do\s+you\s+do\s+for\s+fun|do\s+you\s+play\s+games|archer|swim|kayak|gaming/;
+    if (hobbyIntentEn.test(s)) return "I swim and do kayaking, I was an archer in high school, and I love computer games.";
+    const socialIntentEn = /social|friend|boyfriend|personal\s*life|family|relationship|close\s*friend/;
+    if (socialIntentEn.test(s)) return "I love my boyfriend and my close friends.";
+    return "I'm not sure I got that. Ask about education, experience, skills, hobbies, certificates, languages, or contact.";
   }
 }
 

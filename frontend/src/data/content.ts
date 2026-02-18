@@ -60,7 +60,7 @@ export const content: Record<Lang, any> = {
         {
           position: "Robotik Kodlama Öğretmeni",
           company: "Robotik Bilim, YTÜ Teknopark",
-          period: "Mart 2025 - Eylül 2025",
+          period: "Eylül 2024 - Eylül 2025",
           description: "Robotik ve programlama eğitimi vererek, temel kodlama, problem çözme ve teknoloji kavramlarını öğretiyorum. Uygulamalı robotik projeleriyle yaratıcılık ve eleştirel düşünme becerilerini geliştiriyorum.",
           technologies: ["Robotik", "Programlama", "Eğitim"],
         },
@@ -107,7 +107,7 @@ export const content: Record<Lang, any> = {
           name: "Ankara AI Hackathon (BTK Akademi)",
           period: "5 – 6 Şubat 2026",
           description: "Ankara Hackathon 26 kapsamında SafeBank AI projesi ile AI Agent çözümü geliştirdim.",
-          image: "/certificate-ankara-ai-hackathon.jpg",
+          image: "/certificate-ankara.png",
         },
         {
           name: "INSIDER ONE – AI WEEKEND",
@@ -292,7 +292,7 @@ export const content: Record<Lang, any> = {
         {
           position: "Robotics Coding Teacher",
           company: "Robotics Science, YTÜ Technopark",
-          period: "March 2025 - September 2025",
+          period: "September 2024 - September 2025",
           description: "I teach robotics and programming, teaching basic coding, problem-solving, and technology concepts. I develop creativity and critical thinking skills through hands-on robotics projects.",
           technologies: ["Robotics", "Programming", "Education"],
         },
@@ -339,7 +339,7 @@ export const content: Record<Lang, any> = {
           name: "Ankara AI Hackathon (BTK Academy)",
           period: "February 5 – 6, 2026",
           description: "Developed an AI Agent solution with the SafeBank AI project at Ankara Hackathon 26.",
-          image: "/certificate-ankara-ai-hackathon.jpg",
+          image: "/certificate-ankara.png",
         },
         {
           name: "INSIDER ONE – AI WEEKEND",

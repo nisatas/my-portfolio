@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import heroBg from "../assets/hero-bg.jpg";
 import photo from "../assets/photo.jpg";
 import { useApp } from "../context/AppContext";
@@ -9,18 +10,37 @@ export default function Hero() {
   const { lang, theme } = useApp();
   const t = content[lang];
   const typedText = useTypewriter(t.hero.title);
+  const [aboutBgOpacity, setAboutBgOpacity] = useState(1);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const fadeEnd = Math.min(window.innerHeight * 0.6, 500);
+      const op = Math.max(0, 1 - y / fadeEnd);
+      setAboutBgOpacity(op);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <section
       id="about"
       className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 overflow-hidden"
     >
-      {/* Hakkımda arka plan: sadece resim (eskisi gibi) */}
+      {/* Hakkımda arka plan: aşağı kaydıkça silikleşir */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-fixed origin-center hero-bg-animate"
-        style={{ backgroundImage: `url(${heroBg})` }}
-      />
-      <div className={`absolute inset-0 ${theme === "dark" ? "bg-black/50" : "bg-white/30"}`} />
+        className="absolute inset-0 transition-opacity duration-150"
+        style={{ opacity: aboutBgOpacity }}
+        aria-hidden
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-fixed origin-center hero-bg-animate"
+          style={{ backgroundImage: `url(${heroBg})` }}
+        />
+        <div className={`absolute inset-0 ${theme === "dark" ? "bg-black/50" : "bg-white/30"}`} />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-6xl">
