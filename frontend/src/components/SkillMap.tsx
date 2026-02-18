@@ -74,9 +74,13 @@ export default function SkillMap() {
   }, [dragging]);
 
   const handlePointerUp = useCallback(() => {
+    const wasDragging = dragging;
     setDragging(null);
+    if (!didDragRef.current && wasDragging) {
+      setActiveId((prev) => (prev === wasDragging ? null : wasDragging));
+    }
     setTimeout(() => { didDragRef.current = false; }, 0);
-  }, []);
+  }, [dragging]);
 
   useEffect(() => {
     if (!dragging) return;
