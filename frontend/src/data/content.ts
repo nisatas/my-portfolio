@@ -104,16 +104,16 @@ export const content: Record<Lang, any> = {
       title: "Sertifikalar",
       items: [
         {
+          name: "Ankara AI Hackathon (BTK Akademi)",
+          period: "5 – 6 Şubat 2026",
+          description: "Ankara Hackathon 26 kapsamında SafeBank AI projesi ile AI Agent çözümü geliştirdim.",
+          image: "/certificate-ankara-ai-hackathon.jpg",
+        },
+        {
           name: "INSIDER ONE – AI WEEKEND",
           period: "29 Kasım – 30 Kasım 2025",
           description: "LLM temelleri ve n8n ile otomasyon geliştirme alanlarında eğitim aldım.",
           image: "/certificate-ai-weekend.jpg",
-        },
-        {
-          name: "Ankara AI Hackathon (BTK Akademi)",
-          period: "2025",
-          description: "Ankara Hackathon 26 kapsamında SafeBank AI projesi ile AI Agent çözümü geliştirdim.",
-          image: "/certificate-ankara-ai-hackathon.jpg",
         },
       ],
     },
@@ -336,16 +336,16 @@ export const content: Record<Lang, any> = {
       title: "Certificates",
       items: [
         {
+          name: "Ankara AI Hackathon (BTK Academy)",
+          period: "February 5 – 6, 2026",
+          description: "Developed an AI Agent solution with the SafeBank AI project at Ankara Hackathon 26.",
+          image: "/certificate-ankara-ai-hackathon.jpg",
+        },
+        {
           name: "INSIDER ONE – AI WEEKEND",
           period: "November 29 – November 30 2025",
           description: "I received training in LLM fundamentals and automation development with n8n.",
           image: "/certificate-ai-weekend.jpg",
-        },
-        {
-          name: "Ankara AI Hackathon (BTK Academy)",
-          period: "2025",
-          description: "Developed an AI Agent solution with the SafeBank AI project at Ankara Hackathon 26.",
-          image: "/certificate-ankara-ai-hackathon.jpg",
         },
       ],
     },
