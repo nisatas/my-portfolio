@@ -1,13 +1,13 @@
 # Nisa Portfolio
 
-Kişisel portföy sitesi. Frontend (React + Vite) ve Backend (Node.js + Express) ayrı klasörlerdedir.
+Personal portfolio site. Frontend (React + Vite) and Backend (Node.js + Express) are in separate folders.
 
-## Yapı
+## Structure
 
-- **frontend/** – Portföy arayüzü (React, Vite, Tailwind)
-- **backend/** – API (iletişim formu, NisaBot proxy)
+- **frontend/** – Portfolio UI (React, Vite, Tailwind)
+- **backend/** – API (contact form, NisaBot proxy)
 
-## Çalıştırma
+## Running locally
 
 ### Backend
 
@@ -15,11 +15,11 @@ Kişisel portföy sitesi. Frontend (React + Vite) ve Backend (Node.js + Express)
 cd backend
 npm install
 cp .env.example .env
-# .env içine GEMINI_API_KEY ekle (NisaBot için)
+# Add GEMINI_API_KEY to .env (for NisaBot)
 npm run dev
 ```
 
-**Windows (PowerShell):** `cp` yerine `Copy-Item .env.example .env` kullanabilirsin.
+**Windows (PowerShell):** Use `Copy-Item .env.example .env` instead of `cp`.
 
 Backend: http://localhost:3001
 
@@ -33,28 +33,28 @@ npm run dev
 
 Frontend: http://localhost:5173
 
-Backend ile birlikte kullanmak için `frontend/.env` oluşturup `VITE_API_URL=http://localhost:3001` ekle (örnek: `frontend/.env.example`).
+To use with the backend, create `frontend/.env` and add `VITE_API_URL=http://localhost:3001` (see `frontend/.env.example`).
 
-## Frontend'i backend'e bağlama
+## Connecting frontend to backend
 
-- **NisaBot:** `frontend/.env` içinde `VITE_API_URL=http://localhost:3001` yoksa chat doğrudan Gemini'ye gider (tarayıcıda API key gerekir). Tanımlıysa istekler backend'e gider, API key sunucuda kalır.
-- **İletişim formu:** `VITE_API_URL` tanımlıysa form `POST /api/contact` ile backend'e gönderilir; yoksa Gmail açılır.
+- **NisaBot:** If `VITE_API_URL=http://localhost:3001` is not set in `frontend/.env`, chat talks to Gemini directly (API key needed in the browser). If set, requests go to the backend and the API key stays on the server.
+- **Contact form:** If `VITE_API_URL` is set, the form is sent via `POST /api/contact` to the backend; otherwise Gmail opens.
 
-## Ortam dosyaları
+## Environment files
 
-| Konum | Açıklama |
-|-------|----------|
-| `backend/.env` | `GEMINI_API_KEY`, `PORT`, `FRONTEND_ORIGIN` — `backend/.env.example` kopyala. |
-| `frontend/.env` | `VITE_API_URL` (backend adresi) — istege bagli; `frontend/.env.example` ornek. |
+| Location | Description |
+|----------|-------------|
+| `backend/.env` | `GEMINI_API_KEY`, `PORT`, `FRONTEND_ORIGIN` — copy from `backend/.env.example`. |
+| `frontend/.env` | `VITE_API_URL` (backend URL) — optional; see `frontend/.env.example`. |
 
-`.env` dosyaları `.gitignore` ile takip dışındadır; **asla commit etme.**
+`.env` files are in `.gitignore`; **do not commit them.**
 
-## Proje yapısı
+## Project structure
 
 ```
 nisa-portfolio/
 ├── frontend/              # React + Vite
-│   ├── public/            # Statik dosyalar (favicon, cv.pdf)
+│   ├── public/            # Static assets (favicon, cv.pdf)
 │   ├── src/
 │   │   ├── api.ts         # VITE_API_URL → backend
 │   │   ├── App.tsx, main.tsx, index.css
@@ -68,11 +68,11 @@ nisa-portfolio/
 │   ├── .env.example
 │   ├── package.json
 ├── render.yaml            # Render Blueprint
-├── RENDER.md              # Render deploy adimlari
+├── RENDER.md              # Render deploy steps
 └── README.md
 ```
 
 ## Deploy
 
-- **Render (önerilen):** Frontend + backend birlikte; NisaBot ve iletişim formu çalışır. Adım adım: **RENDER.md**
-- **Vercel (sadece frontend):** Root Directory = `frontend`. Backend yayında olmaz; NisaBot ve form API'si çalışmaz.
+- **Render (recommended):** Frontend and backend together; NisaBot and contact form work. Step-by-step: **RENDER.md**
+- **Vercel (frontend only):** Set Root Directory to `frontend`. Backend is not deployed; NisaBot and form API will not work.
